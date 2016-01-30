@@ -27,7 +27,8 @@ var levelController = {
         for (var i = 0; i < this.levelObjects[toPlayer].length; i++) {
             var currentObject = this.levelObjects[toPlayer][i];
             if (currentObject.clickId !== undefined) {
-                jsGFwk.IO.touch.unregisterTouch(currentObject.clickId);
+                jsGFwk.IO.touch.unregisterTouch(currentObject.touchId);
+                jsGFwk.IO.mouse.unregisterClick(currentObject.clickId);
             }
             currentObject.destroy();
         }
