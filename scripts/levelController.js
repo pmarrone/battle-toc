@@ -18,5 +18,6 @@ var levelController = {
     },
     updateGame: function (toPlayer) {
         GLOBAL.currentLevels[toPlayer]++;
+        this.cloneObjectsFor(levels[GLOBAL.currentLevels[toPlayer]][toPlayer]);
     }
 };

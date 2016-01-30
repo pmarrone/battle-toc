@@ -25,12 +25,13 @@
     <body style="margin:0; padding:0">
         <canvas id="canvas" width="1280" height="800"></canvas>
     </body>
-    <script>
+    <script>        
         jsGFwk.settings.canvas = "canvas";
         jsGFwk.settings.clearColor = "#7E997B";
         jsGFwk.settings.frameRate = 1000 / 60;
-        jsGFwk.settings.width = 1280;
-        jsGFwk.settings.height = 800;
+        jsGFwk.settings.width = window.innerWidth; //1280;
+        jsGFwk.settings.height = window.innerHeight; //800;
+        jsGFwk.settings.applyChanges();
         
         jsGFwk.include("Debugger");
         jsGFwk.Debugger.on = false;
