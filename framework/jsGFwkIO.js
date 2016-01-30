@@ -85,7 +85,11 @@ jsGFwk.IO = {
 		
 		_mouseUp: function() {
 			jsGFwk.IO.mouse._isMousePressed = false;
-			for (var i = 0; i < jsGFwk.IO.mouse._mouseClickCallers.length; jsGFwk.IO.mouse._mouseClickCallers[i++](jsGFwk.IO.mouse._lastDownCoords));
+			for (var i = 0; i < jsGFwk.IO.mouse._mouseClickCallers.length; i++) {
+                if (jsGFwk.IO.mouse._mouseClickCallers[i](jsGFwk.IO.mouse._lastDownCoords)) {
+                    break;
+                }
+            }
 		},
 		
 		_mouseMove: function(e) {

@@ -1,3 +1,11 @@
+/*global levelController, jsGFwk*/
+
+var clickActions = {
+    updateGame: function () {
+        levelController.updateGame(this.belongToPlayer);
+    }
+};
+
 var shape = {
     onInit: function (params) {
         var self = this;
@@ -7,15 +15,14 @@ var shape = {
         this.height = params.height;
         this.belongToPlayer = params.player;
         this.drawPointer = params.draw;
+        this.clickAction = params.clickAction || clickActions.updateGame;
         
         if (params.isClickable) {
             this.clickId = jsGFwk.IO.mouse.registerClick(function (coord) {
                 var fakeMouse = {x: coord.x, y: coord.y, width: 1, height: 1 };
-
                 if (jsGFwk.Collisions.areCollidingBy(self, fakeMouse, jsGFwk.Collisions.collidingModes.RECTANGLE)) {
                     jsGFwk.IO.mouse.unregisterClick(self.clickId);
-                    levelController.updateGame(self.belongToPlayer);
-                    self.destroy();
+                    return self.clickAction();
                 }
             });
         }
@@ -27,4 +34,5 @@ var shape = {
     onDraw: function (context) {
         this.drawPointer.call(this, context);
     }
-}
+};
+
