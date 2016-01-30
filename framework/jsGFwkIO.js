@@ -88,7 +88,6 @@ jsGFwk.IO = {
 					jsGFwk.IO.mouse._mouseDownCallers[p](jsGFwk.IO.mouse._lastDownCoords);
 				}
 			}
-        
         },
 		
 		_mouseUp: function() {
@@ -139,7 +138,6 @@ jsGFwk.IO = {
 	    registerDown: function(f) {
             this._mouseDownCallers[this._mouseDownCounter] = f;
 			this._mouseDownCounter++;
-			//this._mouseClickCallers.push(f);
 			return (this._mouseDownCounter - 1);
 	    },
 		
@@ -156,6 +154,33 @@ jsGFwk.IO = {
             this._mouseWhellCallers.splice(callerId, 1);
         }
 	},
+    
+    touch: {
+        _touchCounter: 0,
+        _touchCallers: {},
+        _getCoordinates: function (e) {
+            return { 
+                x: e.changedTouches[0].clientX, 
+                y: e.changedTouches[0].clientY
+            };
+        },
+        _touchEnd: function (e) {
+            var currentTouch = jsGFwk.IO.touch._getCoordinates(e);
+            for (var p in jsGFwk.IO.touch._touchCallers) {
+				if (jsGFwk.IO.touch._touchCallers.hasOwnProperty(p)) {
+					jsGFwk.IO.touch._touchCallers[p](currentTouch);
+				}
+			}
+        },
+        registerTouch: function (f) {
+            this._touchCallers[this._touchCounter] = f;
+			this._touchCounter++;
+			return (this._touchCounter - 1);
+        },
+        unregisterTouch: function (callerId) {
+            delete this._touchCallers[callerId];
+        }
+    },
 	
 	onStart: function() {
 		//Register all listeners
@@ -167,6 +192,8 @@ jsGFwk.IO = {
 		document.getElementById(jsGFwk.settings.canvas).addEventListener("mousemove", this.mouse._mouseMove, false);
 		document.getElementById(jsGFwk.settings.canvas).addEventListener("mousewheel", this.mouse._mouseWheel, false);
 		document.getElementById(jsGFwk.settings.canvas).addEventListener("DOMMouseScroll", this.mouse._mouseWheel, false);
+        
+        document.getElementById(jsGFwk.settings.canvas).addEventListener("touchend", this.touch._touchEnd, false);
 	},
 	onLoadReady: function () {
 		jsGFwk.include(this._plugInName);
