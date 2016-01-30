@@ -48,6 +48,7 @@
         
         
         var clickableContainer = jsGFwk.Container.createContainer('clickable', clickable, true);
+        clickableContainer.cloneObject({mouseTracker, })
         
         jsGFwk.Scenes.create({name: "game",
                               gameObjects: [background, polygon, clickableContainer] });
