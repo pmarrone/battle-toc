@@ -15,7 +15,7 @@ var levels;
             player = params.player;
             trueBlockColor = params.trueBlockColor;
             otherColor = params.otherColor;
-            margin = params.margins;
+            margins = params.margins;
         }
         margins = margins || 0;
         
@@ -47,6 +47,23 @@ var levels;
             }
         }
         return blocks;
+    }
+    
+    function addGridLevel(params) {
+        var number = params.number || 1;
+        var trueBlockColor1 = params.trueBlockColor || 'blue';
+        var otherColor1 = params.otherColor || 'red';
+        var trueBlockColor2 = params.trueBlockColor || 'red';
+        var therColor2 = params.otherColor || 'blue';
+
+        return {
+            player1: function () {
+            return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player1',  trueBlockColor1, otherColor1, 50);
+            },
+            player2: function () {
+                return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player2', trueBlockColor1, otherColor1, 50);
+            }    
+        };
     }
     
     
