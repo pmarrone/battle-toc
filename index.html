@@ -37,8 +37,6 @@
     <script language="Javascript" src="framework/jsGFwkFonts.js"></script>
     <script language="Javascript" src="framework/jsGFwkTimers.js"></script>
     
-    <script language="Javascript" src="framework/jsGFwkDebugger.js"></script>
-    
     <script language="Javascript" src="lib/SAT.js"></script>
     <script language="Javascript" src="lib/fastClick.js"></script>
     
@@ -62,9 +60,6 @@
         jsGFwk.settings.applyChanges();
         
         FastClick.attach(document.getElementById(jsGFwk.settings.canvas));
-        
-        jsGFwk.include("Debugger");
-        jsGFwk.Debugger.on = false;
         
         jsGFwk.include("FastAnimation");
         jsGFwk.include("Container");
