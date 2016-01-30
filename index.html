@@ -21,6 +21,7 @@
     <script language="Javascript" src="scripts/levelController.js"></script>
     <script language="Javascript" src="scripts/shapeBucket.js"></script>
     <script language="Javascript" src="scripts/levels.js"></script>
+    <script language="Javascript" src="scripts/foreground.js"></script>
     
     <body style="margin:0; padding:0">
         <canvas id="canvas" width="1280" height="800"></canvas>
@@ -60,7 +61,7 @@
         
         jsGFwk.Scenes.create({name: "game",
                               gameObjects: [background, levelController,
-                                            shapeContainer] });
+                                            shapeContainer, foreground] });
         
         jsGFwk.start();
         jsGFwk.Scenes.scenes.game.enable();
