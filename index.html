@@ -48,6 +48,7 @@
         jsGFwk.Fonts.createFont({ name: 'roboto', source: 'fonts/RobotoMono-Thin.ttf' });
         
         var clickableContainer = jsGFwk.Container.createContainer('clickable', clickable, true);
+        clickableContainer.cloneObject({mouseTracker, })
         
         jsGFwk.Scenes.create({name: "game",
                               gameObjects: [background, 
