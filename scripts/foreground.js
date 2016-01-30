@@ -43,5 +43,8 @@ var foreground = {
         context.font = '80pt zxBold';
         context.fillText(GLOBAL.currentPlayTime, 0, -(jsGFwk.settings.width / 2));
         context.restore();
+        
+        levels[GLOBAL.currentLevels.player1].player1target && levels[GLOBAL.currentLevels.player1].player1target(context);
+        levels[GLOBAL.currentLevels.player2].player2target && levels[GLOBAL.currentLevels.player2].player2target(context);
     }
 };
