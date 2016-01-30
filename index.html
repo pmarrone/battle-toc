@@ -18,6 +18,9 @@
     <script language="Javascript" src="lib/SAT.js"></script>
     <script language="Javascript" src="scripts/background.js"></script>
     <script language="Javascript" src="scripts/polygon.js"></script>
+
+    <script language="Javascript" src="scripts/mouseTracker.js"></script>
+    <script language="Javascript" src="scripts/clickable.js"></script>
     <body style="margin:0; padding:0">
         <canvas id="canvas" width="1280" height="800"></canvas>
     </body>
@@ -44,8 +47,12 @@
         jsGFwk.Fonts.createFont({ name: 'zxBold', source: 'fonts/zxBold.ttf' });
         jsGFwk.Fonts.createFont({ name: 'roboto', source: 'fonts/RobotoMono-Thin.ttf' });
         
+        
+        var clickableContainer = jsGFwk.Container.createContainer('clickable', clickable, true);
+        
         jsGFwk.Scenes.create({name: "game",
-                              gameObjects: [background, polygon] });
+                              gameObjects: [background, polygon, clickableContainer] });
+        
         
         jsGFwk.start();
         
