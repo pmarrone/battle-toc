@@ -36,6 +36,8 @@
         jsGFwk.settings.height = window.innerHeight; //800;
         jsGFwk.settings.applyChanges();
         
+        FastClick.attach(document.getElementById(jsGFwk.settings.canvas));
+        
         jsGFwk.include("Debugger");
         jsGFwk.Debugger.on = false;
         
