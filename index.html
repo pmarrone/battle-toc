@@ -17,10 +17,10 @@
     
     <script language="Javascript" src="lib/SAT.js"></script>
     <script language="Javascript" src="scripts/background.js"></script>
-    <script language="Javascript" src="scripts/polygon.js"></script>
-
-    <script language="Javascript" src="scripts/mouseTracker.js"></script>
-    <script language="Javascript" src="scripts/clickable.js"></script>
+    <script language="Javascript" src="scripts/shape.js"></script>
+    <script language="Javascript" src="scripts/levelController.js"></script>
+    <script language="Javascript" src="scripts/shapeBucket.js"></script>
+    
     <body style="margin:0; padding:0">
         <canvas id="canvas" width="1280" height="800"></canvas>
     </body>
@@ -44,15 +44,21 @@
         jsGFwk.include("Fonts");
         jsGFwk.include("Timer");
         
+        var GLOBAL = {
+            currentLevels: {
+                player1: 0,
+                player2: 0
+            }
+        };
+        
         jsGFwk.Fonts.createFont({ name: 'zxBold', source: 'fonts/zxBold.ttf' });
         jsGFwk.Fonts.createFont({ name: 'roboto', source: 'fonts/RobotoMono-Thin.ttf' });
         
-        var clickableContainer = jsGFwk.Container.createContainer('clickable', clickable, true);
-        clickableContainer.cloneObject({mouseTracker, })
+        var shapeContainer = jsGFwk.Container.createContainer('shapeContainer', shape, true);
         
         jsGFwk.Scenes.create({name: "game",
-                              gameObjects: [background, 
-                                            clickableContainer] });
+                              gameObjects: [background, levelController,
+                                            shapeContainer] });
         
         jsGFwk.start();
         jsGFwk.Scenes.scenes.game.enable();
