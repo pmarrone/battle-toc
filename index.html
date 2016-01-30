@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Atom</title>
+        <title>Battle TOC</title>
     </head>
     <script language="Javascript" src="framework/jsGFwk.js"></script>
     <script language="Javascript" src="framework/jsGFwk2dFastAnimation.js"></script>
@@ -47,15 +47,13 @@
         jsGFwk.Fonts.createFont({ name: 'zxBold', source: 'fonts/zxBold.ttf' });
         jsGFwk.Fonts.createFont({ name: 'roboto', source: 'fonts/RobotoMono-Thin.ttf' });
         
-        
         var clickableContainer = jsGFwk.Container.createContainer('clickable', clickable, true);
         
         jsGFwk.Scenes.create({name: "game",
-                              gameObjects: [background, polygon, clickableContainer] });
-        
+                              gameObjects: [background, 
+                                            clickableContainer] });
         
         jsGFwk.start();
-        
         jsGFwk.Scenes.scenes.game.enable();
     </script>
 </html>
