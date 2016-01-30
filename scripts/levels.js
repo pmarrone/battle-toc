@@ -128,7 +128,6 @@ var drawingFunctions = {
                     height: blockHeight,
                     isTrueBlock: isTrueBlock,
                     clickAction: isTrueBlock ? clickActions.updateGame : clickActions.penalizePlayer,
-                    //FIXME
                     draw: draw || drawingFunctions.drawStar
                 };
                 blocks.push(block);
@@ -164,14 +163,6 @@ var drawingFunctions = {
             },
             player2: function () {
                 return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player2', trueBlockColor2, otherColor2, 50, updateModifiers, draw);
-            },
-            player1target: function (context) {
-                context.fillStyle = parseColor(trueBlockColor1);
-                context.fillRect(10, jsGFwk.settings.height - 50, 30, 30);
-            },
-            player2target: function (context) {
-                context.fillStyle = parseColor(trueBlockColor2);
-                context.fillRect(jsGFwk.settings.width - 40, 50, 30, 30);
             }
         };
     }
@@ -248,7 +239,14 @@ var drawingFunctions = {
     
     if (levelsEnabled.shapes) {
         for (i = 2; i <= 8; i++) {
-            levels.push(addGridLevel({number: i, trueBlockColor1: trueBlockColor1, trueBlockColor2: trueBlockColor2, otherColor1: otherColor1, otherColor2: otherColor2, updateModifiers: [], draw: drawingFunctions.drawShapes(drawingFunctions.drawSquare, [drawingFunctions.drawCircle, drawingFunctions.drawTriangle, drawingFunctions.drawStar], Math.min(3, i)) }));
+            levels.push(addGridLevel({number: i, trueBlockColor1: trueBlockColor1,
+                                      trueBlockColor2: trueBlockColor2, otherColor1: otherColor1,
+                                      otherColor2: otherColor2, updateModifiers: [],
+                                      draw: drawingFunctions.drawShapes(drawingFunctions.drawStar,
+                                                                        [drawingFunctions.drawCircle, 
+                                                                         drawingFunctions.drawTriangle, 
+                                                                         drawingFunctions.drawSquare],
+                                                                        Math.min(3, i)) }));
         } 
     } 
 }());

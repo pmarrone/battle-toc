@@ -44,7 +44,24 @@ var foreground = {
         context.fillText(GLOBAL.currentPlayTime, 0, -(jsGFwk.settings.width / 2));
         context.restore();
         
-        levels[GLOBAL.currentLevels.player1].player1target && levels[GLOBAL.currentLevels.player1].player1target(context);
-        levels[GLOBAL.currentLevels.player2].player2target && levels[GLOBAL.currentLevels.player2].player2target(context);
+        GLOBAL.trueBlocks.player1.drawPointer.call({
+            isTrueBlock: GLOBAL.trueBlocks.player1.isTrueBlock,
+            trueBlockColor: GLOBAL.trueBlocks.player1.trueBlockColor,
+            otherColor: GLOBAL.trueBlocks.player1.otherColor,
+            x: GLOBAL.coordsHint.player1.x,
+            y: GLOBAL.coordsHint.player1.y,
+            width: GLOBAL.coordsHint.player1.width,
+            height: GLOBAL.coordsHint.player1.height
+        }, context);
+        
+        GLOBAL.trueBlocks.player2.drawPointer.call({
+            isTrueBlock: GLOBAL.trueBlocks.player2.isTrueBlock,
+            trueBlockColor: GLOBAL.trueBlocks.player2.trueBlockColor,
+            otherColor: GLOBAL.trueBlocks.player2.otherColor,
+            x: GLOBAL.coordsHint.player2.x,
+            y: GLOBAL.coordsHint.player2.y,
+            width: GLOBAL.coordsHint.player2.width,
+            height: GLOBAL.coordsHint.player2.height
+        }, context);
     }
 };
