@@ -20,8 +20,11 @@ var shape = {
         this.drawPointer = params.draw;
         this.clickAction = params.clickAction || clickActions.updateGame;
         this.alpha = 1;
+        this.trueBlockColor = params.trueBlockColor;
+        this.otherColor = params.otherColor;
         this.direction = -0.1;
         this.update = params.update || function () {};
+        this.isTrueBlock = params.isTrueBlock;
         
         if (params.isClickable) {
             this.touchId = jsGFwk.IO.touch.registerTouch(function (coord) {

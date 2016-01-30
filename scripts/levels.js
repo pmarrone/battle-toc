@@ -2,6 +2,11 @@
 
 var levels;
 
+var parseColor = function (color) {
+    color.a = color.a || 255;
+    return "rgba(" + color.r + ", " + color.g + ", " + color.b + ", " + color.a + ")";
+};
+
 (function () {
     
     function createGridLevel(xOffset, width, height, number, gutter, player, trueBlockColor, otherColor, margins) {
@@ -25,10 +30,14 @@ var levels;
         var trueBlock = parseInt(Math.random() * number * number);
         
         function getOtherColor() {
-            if (typeof otherColor === 'string') {
-                return otherColor;
+            if (Array.isArray(otherColor)) {
+                return otherColor[parseInt(Math.random() * otherColor.length)];
             }
-            return otherColor[parseInt(Math.random() * otherColor.length)];
+            return otherColor;
+        }
+        
+        function fadeToGray() {
+            
         }
         
         for (var i = 0; i < number; i ++) {
@@ -36,20 +45,21 @@ var levels;
                 var isTrueBlock = (i * number + j === trueBlock);
                 
                 var block = {
+                    trueBlockColor: trueBlockColor,
+                    otherColor: getOtherColor(),
                     isClickable: true,
                     player: player,
                     x: xOffset + margins + gutter / 2 + (gutter + blockWidth) * i,
                     y: margins + gutter / 2 + (gutter + blockHeight) * j,
                     width: blockWidth,
                     height: blockHeight,
+                    isTrueBlock: isTrueBlock,
                     clickAction: isTrueBlock ? clickActions.updateGame : clickActions.penalizePlayer,
                     //FIXME
-                    draw: function (isTrueBlock, otherColor) {
-                        return function (context) {
-                            context.fillStyle = isTrueBlock ? /*'rgba(255,0,0,'+ this.alpha +')'*/ trueBlockColor : otherColor;
-                            context.fillRect(this.x, this.y, this.width, this.height);
-                        };
-                    }(isTrueBlock, getOtherColor())
+                    draw: function (context) {
+                        context.fillStyle = this.isTrueBlock ? parseColor(this.trueBlockColor) : parseColor(this.otherColor);
+                        context.fillRect(this.x, this.y, this.width, this.height);
+                    }
                 };
                 blocks.push(block);
             }
@@ -59,14 +69,14 @@ var levels;
     
     function addGridLevel(params) {
         var number = params.number || 1;
-        var trueBlockColor1 = params.trueBlockColor1 || 'blue';
-        var otherColor1 = params.otherColor1 || 'red';
-        var trueBlockColor2 = params.trueBlockColor2 || 'red';
-        var otherColor2 = params.otherColor2 || 'blue';
+        var trueBlockColor1 = params.trueBlockColor1 || {r: 0, g: 0, b: 255};
+        var otherColor1 = params.otherColor1 || {r: 255, g: 0, b: 0};
+        var trueBlockColor2 = params.trueBlockColor2 || {r: 255, g: 0, b: 0};
+        var otherColor2 = params.otherColor2 || {r: 0, g: 0, b: 255};
 
         return {
             player1: function () {
-            return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player1',  trueBlockColor1, otherColor1, 50);
+                return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player1',  trueBlockColor1, otherColor1, 50);
             },
             player2: function () {
                 return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player2', trueBlockColor2, otherColor2, 50);
@@ -88,13 +98,13 @@ var levels;
         levels.push(addGridLevel({number: i}));    
     }
     
-    var otherReds = ['rgb(200, 0, 0 )', 'rgb(230, 40, 0 )', 'rgb(150, 30, 20 )', 'rgb(100, 20, 60 )'];
-    var otherBlues = ['rgb(0, 0, 210 )', 'rgb(0, 40, 200 )', 'rgb(50, 50, 200 )', 'rgb(60, 60, 150 )'];
-    var otherColor1 = ['red'];
-    var otherColor2 = ['blue'];
+    var otherReds = [{r: 200, g: 0, b: 0}, {r: 230, g: 40, b: 0}, {r: 150, g: 30, b: 20}, {r: 100, g: 20, b: 60}];
+    var otherBlues = [{r: 0, g: 0, b: 210}, {r: 0, g: 40, b: 200}, {r: 50, g: 50, b: 200}, {r: 60, g: 60, b: 150}];
+    var otherColor1 = [{r: 255, g: 0, b: 0}];
+    var otherColor2 = [{r: 0, g: 0, b: 255}];
     
     for (i = 3; i <= 8; i++) {
-        levels.push(addGridLevel({number: i, trueBlockColor1: 'rgb(230, 40, 80 )', trueBlockColor2: 'rgb(80, 80, 210 )', otherColor1: otherColor1.slice(), otherColor2: otherColor2.slice()}));
+        levels.push(addGridLevel({number: i, trueBlockColor1: {r: 230, g: 40, b: 80}, trueBlockColor2: {r: 80, g: 80, b: 210}, otherColor1: otherColor1.slice(), otherColor2: otherColor2.slice()}));
         if (otherReds.length > 0) {
             otherColor1.push(otherReds.shift());  
         }
