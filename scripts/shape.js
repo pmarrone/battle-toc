@@ -19,6 +19,9 @@ var shape = {
         this.belongToPlayer = params.player;
         this.drawPointer = params.draw;
         this.clickAction = params.clickAction || clickActions.updateGame;
+        this.alpha = 1;
+        this.direction = -0.1;
+        this.update = params.update || function () {};
         
         if (params.isClickable) {
             this.touchId = jsGFwk.IO.touch.registerTouch(function (coord) {
@@ -37,8 +40,11 @@ var shape = {
         }
     },
     onUpdate: function (delta) {
+        this.update(delta);
         /*var mousePosition = new SAT.Vector(this.currentMouseX, this.currentMouseY);
         this.hit = SAT.pointInPolygon(mousePosition, this.polygon);*/
+        //this.alpha += this.direction;
+        //this.direction *= this.alpha <= 0 || this.alpha >= 1 ? -1 : 1; 
     },
     onDraw: function (context) {
         this.drawPointer.call(this, context);
