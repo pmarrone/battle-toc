@@ -1,0 +1,5 @@
+plugins
+xdk
+*.xdk
+*.xdke
+intel*
