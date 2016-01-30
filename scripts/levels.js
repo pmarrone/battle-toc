@@ -82,11 +82,11 @@ var parseColor = function (color) {
                 return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player2', trueBlockColor2, otherColor2, 50);
             },
             player1target: function (context) {
-                context.fillStyle = trueBlockColor1;
+                context.fillStyle = parseColor(trueBlockColor1);
                 context.fillRect(10, jsGFwk.settings.height - 50, 30, 30);
             },
             player2target: function (context) {
-                context.fillStyle = trueBlockColor2;
+                context.fillStyle = parseColor(trueBlockColor2);
                 context.fillRect(jsGFwk.settings.width - 40, 50, 30, 30);
             }
         };
