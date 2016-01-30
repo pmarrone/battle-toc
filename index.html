@@ -40,6 +40,8 @@
     <script language="Javascript" src="framework/jsGFwkDebugger.js"></script>
     
     <script language="Javascript" src="lib/SAT.js"></script>
+    <script language="Javascript" src="lib/fastClick.js"></script>
+    
     <script language="Javascript" src="scripts/background.js"></script>
     <script language="Javascript" src="scripts/shape.js"></script>
     <script language="Javascript" src="scripts/levelController.js"></script>
@@ -75,7 +77,9 @@
             currentLevels: {
                 player1: 0,
                 player2: 0
-            }
+            },
+            maxPlayTime: 20,
+            currentPlayTime: 20
         };
         
         jsGFwk.Fonts.createFont({ name: 'zxBold', source: 'fonts/zxBold.ttf' });
