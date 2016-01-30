@@ -53,6 +53,30 @@ var levels;
     levels = [
         {
             player1: function () {
+                return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, 2, 20, 'player1', 'red', 'blue', 50);
+            },
+            player2: function () {
+                return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, 2, 20, 'player2', 'blue', 'red', 50);
+            }
+        },
+        {
+            player1: function () {
+                return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, 3, 20, 'player1', 'red', 'blue', 50);
+            },
+            player2: function () {
+                return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, 3, 20, 'player2', 'blue', 'red', 50);
+            }
+        },
+        {
+            player1: function () {
+                return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, 4, 20, 'player1', 'red', 'blue', 50);
+            },
+            player2: function () {
+                return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, 4, 20, 'player2', 'blue', 'red', 50);
+            }
+        },
+        {
+            player1: function () {
                 return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, 5, 20, 'player1', 'red', 'blue', 50);
             },
             player2: function () {
