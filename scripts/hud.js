@@ -3,6 +3,9 @@ var hud = {
     visible: true,
     init: function (){
         var self = this;
+        
+        sidePlayers.style.display = 'inline';
+        
         this.showStart = true;
         this.timerBlink = new jsGFwk.Timer({
             action: function () {
@@ -27,6 +30,7 @@ var hud = {
             if (jsGFwk.Collisions.areCollidingBy(self.startOption, fakeMouse, jsGFwk.Collisions.collidingModes.RECTANGLE)) {
                 jsGFwk.IO.touch.unregisterTouch(self.touchId);
                 jsGFwk.IO.mouse.unregisterClick(self.clickId);
+                sidePlayers.style.display = 'none';
                 jsGFwk.Scenes.scenes.game.enable();
                 return;
             }
@@ -34,6 +38,7 @@ var hud = {
             if (jsGFwk.Collisions.areCollidingBy(self.creditsOption, fakeMouse, jsGFwk.Collisions.collidingModes.RECTANGLE)) {
                 jsGFwk.IO.touch.unregisterTouch(self.touchId);
                 jsGFwk.IO.mouse.unregisterClick(self.clickId);
+                sidePlayers.style.display = 'none';
                 jsGFwk.Scenes.scenes.credits.enable();
                 return;
             }
@@ -44,12 +49,14 @@ var hud = {
             if (jsGFwk.Collisions.areCollidingBy(self.startOption, fakeMouse, jsGFwk.Collisions.collidingModes.RECTANGLE)) {
                 jsGFwk.IO.touch.unregisterTouch(self.touchId);
                 jsGFwk.IO.mouse.unregisterClick(self.clickId);
+                sidePlayers.style.display = 'none';
                 jsGFwk.Scenes.scenes.game.enable();
             }
             
             if (jsGFwk.Collisions.areCollidingBy(self.creditsOption, fakeMouse, jsGFwk.Collisions.collidingModes.RECTANGLE)) {
                 jsGFwk.IO.touch.unregisterTouch(self.touchId);
                 jsGFwk.IO.mouse.unregisterClick(self.clickId);
+                sidePlayers.style.display = 'none';
                 jsGFwk.Scenes.scenes.credits.enable();
                 return;
             }
@@ -68,5 +75,9 @@ var hud = {
         
         context.font = '100pt zxBold';
         context.fillText('Credits', jsGFwk.settings.width / 2, (jsGFwk.settings.height / 2) + 100);
+        
+        context.font = '110pt zxBold';
+        context.fillText('PICK A SIDE!!!', jsGFwk.settings.width / 2,
+                         (jsGFwk.settings.height / 2) + 300);
     }
 };
