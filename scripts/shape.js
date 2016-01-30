@@ -25,6 +25,7 @@ var shape = {
         this.direction = -0.1;
         this.updateModifiers = params.updateModifiers || [];
         this.isTrueBlock = params.isTrueBlock;
+        this.listOfOriginalVectorsOfColors = params.listOfOriginalVectorsOfColors;
         
         if (params.isClickable) {
             this.touchId = jsGFwk.IO.touch.registerTouch(function (coord) {

@@ -76,10 +76,30 @@ var drawingFunctions = {
             this.drawPointer.call(this, context);
         };
         return draw;
+    },
+    
+    drawColorShapes: function (trueDrawingFunction, othersDrawingFunctions, maxOthers, maxColors) {
+        var draw = function (context) {
+            if (Array.isArray(this.listOfOriginalVectorsOfColors)) {
+                //Incluir el trueBlockColor
+                this.listOfOriginalVectorsOfColors = [this.trueBlockColor].concat(this.listOfOriginalVectorsOfColors);
+                this.otherColor = this.listOfOriginalVectorsOfColors[parseInt(Math.random() * Math.min(this.listOfOriginalVectorsOfColors.length, maxColors))];
+            }
+            
+            if (this.isTrueBlock) {
+                this.drawPointer = trueDrawingFunction;
+            } else {
+                this.othersDrawingFunctions = othersDrawingFunctions.slice();
+                if (this.trueBlockColor !== this.otherColor) {
+                    this.othersDrawingFunctions = [trueDrawingFunction].concat(this.othersDrawingFunctions);
+                }                
+                this.drawPointer = this.othersDrawingFunctions[parseInt(Math.random() * Math.min(this.othersDrawingFunctions.length, maxOthers))];
+            }
+            this.drawPointer.call(this, context);
+        };
+        return draw;
     }
 };
-
-
 
 (function () {
     
@@ -119,6 +139,7 @@ var drawingFunctions = {
                 var block = {
                     updateModifiers: updateModifiers || [],
                     trueBlockColor: trueBlockColor,
+                    listOfOriginalVectorsOfColors: otherColor.slice(),
                     otherColor: getOtherColor(),
                     isClickable: true,
                     player: player,
@@ -128,7 +149,7 @@ var drawingFunctions = {
                     height: blockHeight,
                     isTrueBlock: isTrueBlock,
                     clickAction: isTrueBlock ? clickActions.updateGame : clickActions.penalizePlayer,
-                    draw: draw || drawingFunctions.drawStar
+                    draw: draw || drawingFunctions.drawSquare
                 };
                 blocks.push(block);
             }
@@ -140,10 +161,11 @@ var drawingFunctions = {
      Niveles habilitados
     */
     var levelsEnabled = {
-        colors1: true,
-        colors2: true,
-        fade: true,
-        shapes: true
+        colors1: false,
+        colors2: false,
+        fade: false,
+        shapes: false,
+        shapesColor: true
     };
     
     function addGridLevel(params) {
@@ -248,5 +270,26 @@ var drawingFunctions = {
                                                                          drawingFunctions.drawSquare],
                                                                         Math.min(3, i)) }));
         } 
-    } 
+    }
+    
+    otherReds = [{r: 255, g: 0, b: 0}, {r: 200, g: 0, b: 0}, {r: 230, g: 40, b: 0}, {r: 150, g: 30, b: 20}, {r: 100, g: 20, b: 60}];
+    otherBlues = [{r: 0, g: 0, b: 255}, {r: 0, g: 0, b: 210}, {r: 0, g: 40, b: 200}, {r: 50, g: 50, b: 200}, {r: 60, g: 60, b: 150}];
+    trueBlockColor1 = {r: 230, g: 40, b: 80};
+    trueBlockColor2 = {r: 40, g: 80, b: 250};
+    
+    if (levelsEnabled.shapesColor) {
+        for (i = 4; i <= 12; i++) {
+            levels.push(addGridLevel({number: i, 
+                                      trueBlockColor1: trueBlockColor1,
+                                      trueBlockColor2: trueBlockColor2, 
+                                      otherColor1: otherReds,
+                                      otherColor2: otherBlues,
+                                      updateModifiers: [],
+                                      draw: drawingFunctions.drawColorShapes(drawingFunctions.drawSquare,
+                                                                        [drawingFunctions.drawCircle, 
+                                                                         drawingFunctions.drawTriangle, 
+                                                                         drawingFunctions.drawStar],
+                                                                         10, 10) }));
+        } 
+    }
 }());
