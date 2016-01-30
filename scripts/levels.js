@@ -64,8 +64,22 @@ var drawingFunctions = {
         context.fillStyle = this.isTrueBlock ? parseColor(this.trueBlockColor) : getRandomColorFromArray(this.otherColor);
         context.fill();
         context.closePath();
+    },
+    
+    drawShapes: function (trueDrawingFunction, othersDrawingFunctions, maxOthers) {
+        var draw = function (context) {
+            if (this.isTrueBlock) {
+                this.drawPointer = trueDrawingFunction;
+            } else {
+                this.drawPointer = othersDrawingFunctions[parseInt(Math.random() * maxOthers)];
+            }
+            this.drawPointer.call(this, context);
+        };
+        return draw;
     }
 };
+
+
 
 (function () {
     
@@ -129,7 +143,8 @@ var drawingFunctions = {
     var levelsEnabled = {
         colors1: false,
         colors2: false,
-        fade: true
+        fade: false,
+        shapes: true
     };
     
     function addGridLevel(params) {
@@ -211,8 +226,9 @@ var drawingFunctions = {
         this.otherColor = fadeToGrey(this.otherColor, delta);
     };
     
+    var i;
     if (levelsEnabled.fade) {
-        for (var i = 3; i <= 8; i++) {
+        for (i = 3; i <= 8; i++) {
             levels.push(addGridLevel({number: i, trueBlockColor1: trueBlockColor1, trueBlockColor2: trueBlockColor2, otherColor1: otherColor1.slice(), otherColor2: otherColor2.slice(), updateModifiers: [fadeBlock] }));
 
             if (otherReds.length > 0) {
@@ -222,5 +238,17 @@ var drawingFunctions = {
                 otherColor2.push(otherBlues.shift());
             }
         }        
-    }   
+    }
+    
+    
+    trueBlockColor1 = {r: 0, g: 0, b: 255};
+    otherColor1 = {r: 0, g: 0, b: 255};
+    trueBlockColor2 = {r: 255, g: 0, b: 0};
+    otherColor2 = {r: 255, g: 0, b: 0};
+    
+    if (levelsEnabled.shapes) {
+        for (i = 2; i <= 8; i++) {
+            levels.push(addGridLevel({number: i, trueBlockColor1: trueBlockColor1, trueBlockColor2: trueBlockColor2, otherColor1: otherColor1, otherColor2: otherColor2, updateModifiers: [], draw: drawingFunctions.drawShapes(drawingFunctions.drawSquare, [drawingFunctions.drawCircle, drawingFunctions.drawTriangle, drawingFunctions.drawStar], Math.min(3, i)) }));
+        } 
+    } 
 }());
