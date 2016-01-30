@@ -80,6 +80,7 @@ jsGFwk.IO = {
 		},
 		
 		_mouseDown: function(e) {
+            e.preventDefault();
 			jsGFwk.IO.mouse._isMousePressed = true;
 			jsGFwk.IO.mouse._lastDownCoords = jsGFwk.IO.mouse._getCoordinates(e);
             for (var p in jsGFwk.IO.mouse._mouseDownCallers) {
@@ -162,6 +163,7 @@ jsGFwk.IO = {
             };
         },
         _touchEnd: function (e) {
+            e.preventDefault();
             var currentTouch = jsGFwk.IO.touch._getCoordinates(e);
             for (var p in jsGFwk.IO.touch._touchCallers) {
 				if (jsGFwk.IO.touch._touchCallers.hasOwnProperty(p)) {
