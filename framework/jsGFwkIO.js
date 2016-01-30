@@ -56,7 +56,8 @@ jsGFwk.IO = {
 	},
 	
 	mouse: {
-		_mouseClickCallers: [],
+		_mouseClickCounter: 0,
+		_mouseClickCallers: {},
 		_mouseMoveCallers: [],
 		_mouseDownCallers: [],
 	    _mouseWhellCallers: [],
@@ -85,11 +86,16 @@ jsGFwk.IO = {
 		
 		_mouseUp: function() {
 			jsGFwk.IO.mouse._isMousePressed = false;
-			for (var i = 0; i < jsGFwk.IO.mouse._mouseClickCallers.length; i++) {
+			for (var p in jsGFwk.IO.mouse._mouseClickCallers) {
+				if (jsGFwk.IO.mouse._mouseClickCallers.hasOwnProperty(p)) {
+					jsGFwk.IO.mouse._mouseClickCallers[p](jsGFwk.IO.mouse._lastDownCoords);
+				}
+			}
+			/*for (var i = 0; i < jsGFwk.IO.mouse._mouseClickCallers.length; i++) {
                 if (jsGFwk.IO.mouse._mouseClickCallers[i](jsGFwk.IO.mouse._lastDownCoords)) {
                     break;
                 }
-            }
+            }*/
 		},
 		
 		_mouseMove: function(e) {
@@ -103,12 +109,15 @@ jsGFwk.IO = {
 		},
 		
 		registerClick: function(f) {
-			this._mouseClickCallers.push(f);
-			return (this._mouseClickCallers.length - 1);
+			this._mouseClickCallers[this._mouseClickCounter] = f;
+			this._mouseClickCounter++;
+			//this._mouseClickCallers.push(f);
+			return (this._mouseClickCounter - 1);
 		},
 		
 		unregisterClick: function(callerId) {
-			this._mouseClickCallers.splice(callerId, 1);
+			delete this._mouseClickCallers[callerId];
+			//this._mouseClickCallers.splice(callerId, 1);
 		},
 		
 		registerMove: function(f) {
