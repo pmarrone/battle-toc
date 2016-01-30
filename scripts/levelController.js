@@ -56,6 +56,9 @@ var levelController = {
         for (var i = 0; i < levelObjectsParams.length; i++) {
             var currentObject = shapeContainer.cloneObject(levelObjectsParams[i]);
             this.levelObjects[player].push(currentObject);
+            if (currentObject.isTrueBlock) {
+                GLOBAL.trueBlocks[currentObject.belongToPlayer] = currentObject;
+            }
         }
     }
     
