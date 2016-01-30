@@ -52,8 +52,16 @@ var levels;
     
     levels = [
         {
+            player1target: function (context) {
+                context.fillStyle = 'red';
+                context.fillRect(10, jsGFwk.settings.height - 50, 30, 30);
+            },
             player1: function () {
                 return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, 2, 20, 'player1', 'red', 'blue', 50);
+            },
+            player2target: function (context) {
+                context.fillStyle = 'blue';
+                context.fillRect(jsGFwk.settings.width - 40, 50, 30, 30);
             },
             player2: function () {
                 return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, 2, 20, 'player2', 'blue', 'red', 50);

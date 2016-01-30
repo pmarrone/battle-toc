@@ -82,7 +82,6 @@ jsGFwk.IO = {
 		_mouseDown: function(e) {
 			jsGFwk.IO.mouse._isMousePressed = true;
 			jsGFwk.IO.mouse._lastDownCoords = jsGFwk.IO.mouse._getCoordinates(e);
-			//for (var i = 0; i < jsGFwk.IO.mouse._mouseDownCallers.length; jsGFwk.IO.mouse._mouseDownCallers[i++](jsGFwk.IO.mouse._lastDownCoords));
             for (var p in jsGFwk.IO.mouse._mouseDownCallers) {
 				if (jsGFwk.IO.mouse._mouseDownCallers.hasOwnProperty(p)) {
 					jsGFwk.IO.mouse._mouseDownCallers[p](jsGFwk.IO.mouse._lastDownCoords);
@@ -117,13 +116,11 @@ jsGFwk.IO = {
 		registerClick: function(f) {
 			this._mouseClickCallers[this._mouseClickCounter] = f;
 			this._mouseClickCounter++;
-			//this._mouseClickCallers.push(f);
 			return (this._mouseClickCounter - 1);
 		},
 		
 		unregisterClick: function(callerId) {
 			delete this._mouseClickCallers[callerId];
-			//this._mouseClickCallers.splice(callerId, 1);
 		},
 		
 		registerMove: function(f) {
