@@ -23,7 +23,7 @@ var shape = {
         this.trueBlockColor = params.trueBlockColor;
         this.otherColor = params.otherColor;
         this.direction = -0.1;
-        this.update = params.update || function () {};
+        this.updateModifiers = params.updateModifiers || [];
         this.isTrueBlock = params.isTrueBlock;
         
         if (params.isClickable) {
@@ -43,7 +43,9 @@ var shape = {
         }
     },
     onUpdate: function (delta) {
-        this.update(delta);
+        for (var i = 0; i < this.updateModifiers.length; i++) {
+            this.updateModifiers[i].call(this, delta);    
+        }        
         /*var mousePosition = new SAT.Vector(this.currentMouseX, this.currentMouseY);
         this.hit = SAT.pointInPolygon(mousePosition, this.polygon);*/
         //this.alpha += this.direction;
