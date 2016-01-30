@@ -46,6 +46,8 @@
     <script language="Javascript" src="scripts/shapeBucket.js"></script>
     <script language="Javascript" src="scripts/levels.js"></script>
     <script language="Javascript" src="scripts/foreground.js"></script>
+    <script language="Javascript" src="scripts/hud.js"></script>
+    <script language="Javascript" src="scripts/credits.js"></script>
     
     <body style="margin:0; padding:0">
         <canvas id="canvas" width="1280" height="800"></canvas>
@@ -83,13 +85,48 @@
         jsGFwk.Fonts.createFont({ name: 'zxBold', source: 'fonts/zxBold.ttf' });
         jsGFwk.Fonts.createFont({ name: 'roboto', source: 'fonts/RobotoMono-Thin.ttf' });
         
+        var music = {};
+		music[jsGFwk.ResourceManager.sounds.format.mp3] = { source: "fx/punch.mp3" };
+        music[jsGFwk.ResourceManager.sounds.format.ogg] = { source: "fx/punch.ogg" };
+        jsGFwk.ResourceManager.addSound({ name: "music", sources: music});
+        
+        var clickOk = {};
+		clickOk[jsGFwk.ResourceManager.sounds.format.mp3] = { source: "fx/ok2.mp3" };
+        clickOk[jsGFwk.ResourceManager.sounds.format.ogg] = { source: "fx/ok2.ogg" };
+        jsGFwk.ResourceManager.addSound({ name: "ok", sources: clickOk});
+        
+        var clickMiss = {};
+		clickMiss[jsGFwk.ResourceManager.sounds.format.mp3] = { source: "fx/down2.mp3" };
+        clickMiss[jsGFwk.ResourceManager.sounds.format.ogg] = { source: "fx/down2.ogg" };
+        jsGFwk.ResourceManager.addSound({ name: "miss", sources: clickMiss});
+        
         var shapeContainer = jsGFwk.Container.createContainer('shapeContainer', shape, true);
+        
+        jsGFwk.Scenes.create({name: "hud",
+                              gameObjects: [background, hud] });
+        
+        jsGFwk.Scenes.create({name: "credits",
+                              gameObjects: [background, credits] });
         
         jsGFwk.Scenes.create({name: "game",
                               gameObjects: [background, levelController,
                                             shapeContainer, foreground] });
+
+        jsGFwk.ResourceManager.onResourcesLoadedCompleted = function() {
+            jsGFwk.ResourceManager.sounds.music.audio.loop = true;
+            jsGFwk.ResourceManager.sounds.music.audio.volume = 0.8;
+            jsGFwk.ResourceManager.sounds.music.audio.play();
+            
+            jsGFwk.ResourceManager.sounds.miss.audio.loop = false;
+            jsGFwk.ResourceManager.sounds.miss.audio.volume = 1;
+            
+            jsGFwk.ResourceManager.sounds.ok.audio.loop = false;
+            jsGFwk.ResourceManager.sounds.ok.audio.volume = 1;
+
+            jsGFwk.Scenes.scenes.hud.enable();
+        };
         
         jsGFwk.start();
-        jsGFwk.Scenes.scenes.game.enable();
+        
     </script>
 </html>
