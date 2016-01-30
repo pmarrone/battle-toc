@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Atom</title>
+    </head>
+    <script language="Javascript" src="framework/jsGFwk.js"></script>
+    <script language="Javascript" src="framework/jsGFwk2dFastAnimation.js"></script>
+    <script language="Javascript" src="framework/jsGFwkContainer.js"></script>
+    <script language="Javascript" src="framework/jsGFwkIO.js"></script>
+    <script language="Javascript" src="framework/jsGFwkCollisions.js"></script>
+    <script language="Javascript" src="framework/jsGFwkRM.js"></script>
+    <script language="Javascript" src="framework/jsGFwkSprites.js"></script>
+    <script language="Javascript" src="framework/jsGFwkScenes.js"></script>
+    <script language="Javascript" src="framework/jsGFwkFonts.js"></script>
+    <script language="Javascript" src="framework/jsGFwkTimers.js"></script>
+    
+    <script language="Javascript" src="framework/jsGFwkDebugger.js"></script>
+    
+    <script language="Javascript" src="lib/SAT.js"></script>
+    <script language="Javascript" src="scripts/background.js"></script>
+    <script language="Javascript" src="scripts/polygon.js"></script>
+    <body>
+        <canvas id="canvas" width="1280" height="800"></canvas>
+    </body>
+    <script>
+        jsGFwk.settings.canvas = "canvas";
+        jsGFwk.settings.clearColor = "#7E997B";
+        jsGFwk.settings.frameRate = 1000 / 60;
+        jsGFwk.settings.width = 1280;
+        jsGFwk.settings.height = 800;
+        
+        jsGFwk.include("Debugger");
+        jsGFwk.Debugger.on = false;
+        
+        jsGFwk.include("FastAnimation");
+        jsGFwk.include("Container");
+        jsGFwk.include("IO");
+        jsGFwk.include("Collisions");
+        jsGFwk.include("ResourceManager");
+        jsGFwk.include("Sprites");
+        jsGFwk.include("Scenes");
+        jsGFwk.include("Fonts");
+        jsGFwk.include("Timer");
+        
+        jsGFwk.Fonts.createFont({ name: 'zxBold', source: 'fonts/zxBold.ttf' });
+        jsGFwk.Fonts.createFont({ name: 'roboto', source: 'fonts/RobotoMono-Thin.ttf' });
+        
+        jsGFwk.Scenes.create({name: "game",
+                              gameObjects: [background, polygon] });
+        
+        jsGFwk.start();
+        
+        jsGFwk.Scenes.scenes.game.enable();
+    </script>
+</html>
