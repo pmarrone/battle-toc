@@ -7,6 +7,66 @@ var parseColor = function (color) {
     return "rgba(" + parseInt(color.r) + ", " + parseInt(color.g) + ", " + parseInt(color.b) + ", " + color.a + ")";
 };
 
+function getRandomColorFromArray(colorArray, max) {
+    if (Array.isArray(colorArray)) {
+        return parseColor(colorArray[parseInt(Math.random() * Math.min(max || colorArray.length, colorArray.length))]);
+    }
+    return parseColor(colorArray);
+}
+
+var drawingFunctions = {
+    drawSquare: function(context) {
+        context.fillStyle = this.isTrueBlock ? parseColor(this.trueBlockColor) : parseColor(this.otherColor);
+        context.fillRect(this.x, this.y, this.width, this.height);
+    },
+    
+    drawTriangle: function(context) {
+        var height = this.height * (Math.sqrt(3)/2);
+        context.fillStyle = this.isTrueBlock ? parseColor(this.trueBlockColor) : getRandomColorFromArray(this.otherColor);
+        context.beginPath();
+        context.moveTo(this.x, this.y + height);
+        context.lineTo(this.x + this.width / 2, this.y);
+        context.lineTo(this.x + this.width, this.y + height);
+        context.lineTo(this.x, this.y + height);
+        context.fill();
+        context.closePath();
+    },
+    
+    drawCircle: function (context) {
+      var centerX = this.x + this.width / 2;
+      var centerY = this.y + this.height / 2;
+      var radius = Math.min(this.width, this.height) / 2;
+
+        context.beginPath();
+        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        context.fillStyle = this.isTrueBlock ? parseColor(this.trueBlockColor) : getRandomColorFromArray(this.otherColor);
+        context.fill();
+        context.closePath();
+    },
+    
+    drawStar: function (context) {
+        var i, angle, radius;
+        var radius1 = this.width / 2;
+        var radius2 = radius1 * 0.4;
+        var points = 5;
+        var alpha0 = 0;
+        if (radius2 !== radius1) {
+            points = 2 * points;
+        }
+        
+        context.beginPath();
+        
+        for (i = 0; i <= points; i++) {
+            angle = i * 2 * Math.PI / points - Math.PI / 2 + alpha0;
+            radius = i % 2 === 0 ? radius1 : radius2;
+            context.lineTo(this.x + this.width / 2 + radius * Math.cos(angle), this.y + this.height / 2 + radius * Math.sin(angle));
+        }
+        context.fillStyle = this.isTrueBlock ? parseColor(this.trueBlockColor) : getRandomColorFromArray(this.otherColor);
+        context.fill();
+        context.closePath();
+    }
+};
+
 (function () {
     
     function createGridLevel(xOffset, width, height, number, gutter, player, trueBlockColor, otherColor, margins, updateModifiers, draw) {
@@ -23,7 +83,7 @@ var parseColor = function (color) {
             margins = params.margins;        
             updateModifiers = params.updateModifiers;
         }
-        debugger;
+
         margins = margins || 0;
         
         var blocks = [];
@@ -36,11 +96,6 @@ var parseColor = function (color) {
                 return otherColor[parseInt(Math.random() * otherColor.length)];
             }
             return otherColor;
-        }
-        
-        function drawSquare(context) {
-            context.fillStyle = this.isTrueBlock ? parseColor(this.trueBlockColor) : parseColor(this.otherColor);
-            context.fillRect(this.x, this.y, this.width, this.height);
         }
         
         for (var i = 0; i < number; i ++) {
@@ -60,7 +115,7 @@ var parseColor = function (color) {
                     isTrueBlock: isTrueBlock,
                     clickAction: isTrueBlock ? clickActions.updateGame : clickActions.penalizePlayer,
                     //FIXME
-                    draw: draw || drawSquare
+                    draw: draw || drawingFunctions.drawStar
                 };
                 blocks.push(block);
             }
@@ -133,16 +188,16 @@ var parseColor = function (color) {
     }
     
     function fadeToGrey(originalColor,delta) { 
-        color = {
+        var color = {
             a: originalColor.a,
             b: originalColor.b,
             r: originalColor.r,
             g: originalColor.g
-        }
+        };
         delta = delta || 1;
         delta = Math.min(1, delta);
         delta *= 10;
-        var magicalFactor = 10;
+        var magicalFactor = 5;
         var grayTone = 60;
         color.r += (grayTone - color.r) / magicalFactor * delta;
         color.g += (grayTone - color.g) / magicalFactor * delta;
