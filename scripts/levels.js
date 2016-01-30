@@ -141,9 +141,9 @@ var drawingFunctions = {
      Niveles habilitados
     */
     var levelsEnabled = {
-        colors1: false,
-        colors2: false,
-        fade: false,
+        colors1: true,
+        colors2: true,
+        fade: true,
         shapes: true
     };
     
