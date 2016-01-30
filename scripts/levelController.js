@@ -25,10 +25,11 @@ var levelController = {
     },
     clearPlayerLevel: function (toPlayer) {
         for (var i = 0; i < this.levelObjects[toPlayer].length; i++) {
-            var currentObject = this.levelObjects[toPlayer][i].destroy();
-            if (currentObject && currentObject.clickId) {
+            var currentObject = this.levelObjects[toPlayer][i];
+            if (currentObject.clickId !== undefined) {
                 jsGFwk.IO.mouse.unregisterDown(currentObject.clickId);
             }
+            currentObject.destroy();
         }
         this.levelObjects[toPlayer] = [];
     },

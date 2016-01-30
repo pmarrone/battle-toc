@@ -3,7 +3,10 @@
 var clickActions = {
     updateGame: function () {
         levelController.updateGame(this.belongToPlayer);
-    }
+    },
+    penalizePlayer: function() {
+        levelController.penalizePlayer(this.belongToPlayer);
+    },
 };
 
 var shape = {
