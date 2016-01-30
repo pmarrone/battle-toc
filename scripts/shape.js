@@ -18,7 +18,7 @@ var shape = {
         this.clickAction = params.clickAction || clickActions.updateGame;
         
         if (params.isClickable) {
-            this.clickId = jsGFwk.IO.mouse.registerClick(function (coord) {
+            this.clickId = jsGFwk.IO.mouse.registerDown(function (coord) {
                 var fakeMouse = {x: coord.x, y: coord.y, width: 1, height: 1 };
                 if (jsGFwk.Collisions.areCollidingBy(self, fakeMouse, jsGFwk.Collisions.collidingModes.RECTANGLE)) {
                     return self.clickAction();
