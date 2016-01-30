@@ -42,8 +42,8 @@ var levelController = {
     penalizePlayer: function (toPlayer) {
         if (GLOBAL.currentLevels[toPlayer] > 0) {
             GLOBAL.currentLevels[toPlayer]--;    
-            this.setLevel(toPlayer, GLOBAL.currentLevels[toPlayer]);
         }
+        this.setLevel(toPlayer, GLOBAL.currentLevels[toPlayer]);
     },
     setLevel: function (player, levelNumber) {
         GLOBAL.currentLevels[player] = levelNumber;
