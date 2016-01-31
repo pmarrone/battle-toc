@@ -50,6 +50,9 @@
     <script language="Javascript" src="scripts/credits.js"></script>
     <script language="Javascript" src="scripts/endgame.js"></script>
     
+    <script language="Javascript" src="scripts/instructions.js"></script>
+    
+    
     <body style="margin:0; padding:0">
         <canvas id="canvas" width="1280" height="800"></canvas>
         <div id='players' style='display:none;'>
@@ -130,6 +133,10 @@
         jsGFwk.Scenes.create({name: "hud",
                               gameObjects: [background, hud] });
         
+                
+        jsGFwk.Scenes.create({name: "instructions",
+                              gameObjects: [background, instructions] });
+        
         jsGFwk.Scenes.create({name: "credits",
                               gameObjects: [background, credits] });
         
@@ -138,7 +145,7 @@
                                             shapeContainer, foreground] });
         
         jsGFwk.Scenes.create({name: "endgame", gameObjects: [background, endGame] });
-
+        
         jsGFwk.ResourceManager.onResourcesLoadedCompleted = function() {
             jsGFwk.ResourceManager.sounds.music.audio.loop = true;
             jsGFwk.ResourceManager.sounds.music.audio.volume = 0.8;

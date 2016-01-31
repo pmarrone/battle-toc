@@ -35,7 +35,7 @@ var hud = {
                 //Reset the timer
                 GLOBAL.currentPlayTime = GLOBAL.maxPlayTime;
                 
-                jsGFwk.Scenes.scenes.game.enable();
+                jsGFwk.Scenes.scenes.instructions.enable();
                 return;
             }
             
@@ -55,7 +55,7 @@ var hud = {
                 jsGFwk.IO.mouse.unregisterClick(self.clickId);
                 sidePlayers.style.display = 'none';
                 GLOBAL.currentPlayTime = GLOBAL.maxPlayTime;
-                jsGFwk.Scenes.scenes.game.enable();
+                jsGFwk.Scenes.scenes.instructions.enable();
             }
             
             if (jsGFwk.Collisions.areCollidingBy(self.creditsOption, fakeMouse, jsGFwk.Collisions.collidingModes.RECTANGLE)) {
