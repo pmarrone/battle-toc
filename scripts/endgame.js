@@ -5,6 +5,8 @@ var endGame = {
         this.winner = GLOBAL.currentLevels.player1 === GLOBAL.currentLevels.player2 ?
             'No one wins' : ((GLOBAL.currentLevels.player1 > GLOBAL.currentLevels.player2) ?
                              'Ricky wins' : 'Putin wins');
+        GLOBAL.currentLevels.player1 = 0;
+        GLOBAL.currentLevels.player2 = 0;
         
         this.playTime = new jsGFwk.Timer({
             action: function () {

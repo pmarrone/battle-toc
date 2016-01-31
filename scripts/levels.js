@@ -116,7 +116,7 @@ var drawingFunctions = {
 
 (function () {
     
-    function createGridLevel(xOffset, width, height, number, gutter, player, trueBlockColor, otherColor, margins, updateModifiers, draw) {
+    function createGridLevel(xOffset, width, height, number, gutter, player, trueBlockColor, otherColor, margins, updateModifiers, draw, colorChange) {
         if (typeof xOffset === 'object') {
             var params = xOffset;
             xOffset = params.xOffset;
@@ -125,12 +125,13 @@ var drawingFunctions = {
             number = params.number;
             gutter = params.gutter;
             player = params.player;
+            colorChange = params.colorChange;
             trueBlockColor = params.trueBlockColor;
             otherColor = params.otherColor;
             margins = params.margins;        
             updateModifiers = params.updateModifiers;
         }
-
+        colorChange = colorChange || 0;
         margins = margins || 0;
         
         var blocks = [];
@@ -184,10 +185,10 @@ var drawingFunctions = {
 
         return {
             player1: function () {
-                return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player1',  trueBlockColor1, otherColor1, 50, updateModifiers, draw);
+                return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 5, 'player1',  trueBlockColor1, otherColor1, 50, updateModifiers, draw);
             },
             player2: function () {
-                return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 20, 'player2', trueBlockColor2, otherColor2, 50, updateModifiers, draw);
+                return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 5, 'player2', trueBlockColor2, otherColor2, 50, updateModifiers, draw);
             }
         };
     }
@@ -314,6 +315,22 @@ var drawingFunctions = {
                                                                          drawingFunctions.drawTriangle, 
                                                                          drawingFunctions.drawStar],
                                                                          parseInt(i / 2) - 3, parseInt(i / 2) - 2) }));
+        } 
+    }
+    
+    if (levelsEnabled.shapesColor) {
+        for (i = 20; i <= 28; i++) {
+            levels.push(addGridLevel({number: parseInt(i / 4), 
+                                      trueBlockColor1: trueBlockColor1,
+                                      trueBlockColor2: trueBlockColor2, 
+                                      otherColor1: otherReds,
+                                      otherColor2: otherBlues,
+                                      updateModifiers: [],
+                                      draw: drawingFunctions.drawColorShapes(drawingFunctions.drawSquare,
+                                                                        [drawingFunctions.drawCircle, 
+                                                                         drawingFunctions.drawTriangle, 
+                                                                         drawingFunctions.drawStar],
+                                                                         parseInt(i / 4) - 3, parseInt(i / 4) - 2) }));
         } 
     }
 }());

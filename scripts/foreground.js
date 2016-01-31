@@ -27,14 +27,14 @@ var foreground = {
         context.fillRect(jsGFwk.settings.width - 50, 0, 50, jsGFwk.settings.height);
         
         context.fillStyle = 'black';
-        context.font = '50pt zxBold';
+        context.font = '30pt zxBold';
         
         context.save();
         context.translate(10, 10);
         context.rotate(0.5 * Math.PI);
         context.fillText('Points ' + GLOBAL.currentLevels.player1, 0, 0);
         
-        context.font = '80pt zxBold';
+        context.font = '40pt zxBold';
         context.fillText(GLOBAL.currentPlayTime, 0, -(jsGFwk.settings.width / 2));
         context.restore();
         
@@ -43,7 +43,7 @@ var foreground = {
         context.rotate(-0.5 * Math.PI);
         context.fillText('Points ' + GLOBAL.currentLevels.player2, 0, 0);
         
-        context.font = '80pt zxBold';
+        context.font = '40pt zxBold';
         context.fillText(GLOBAL.currentPlayTime, 0, -(jsGFwk.settings.width / 2));
         context.restore();
         
