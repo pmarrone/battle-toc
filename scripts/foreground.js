@@ -7,6 +7,9 @@ var foreground = {
         this.playTime = new jsGFwk.Timer({
             action: function () {
                 GLOBAL.currentPlayTime--;
+                if (GLOBAL.currentPlayTime === 0) {
+                    jsGFwk.Scenes.scenes.endgame.enable();
+                }
             },
             tickTime: 1
         });

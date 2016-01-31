@@ -1,3 +1,4 @@
+/* global jsGFwk */
 var background = {
     id: 'background',
     visible: true,

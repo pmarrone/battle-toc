@@ -48,6 +48,7 @@
     <script language="Javascript" src="scripts/foreground.js"></script>
     <script language="Javascript" src="scripts/hud.js"></script>
     <script language="Javascript" src="scripts/credits.js"></script>
+    <script language="Javascript" src="scripts/endgame.js"></script>
     
     <body style="margin:0; padding:0">
         <canvas id="canvas" width="1280" height="800"></canvas>
@@ -98,7 +99,7 @@
                     width: 50, height: 50
                 }
             },
-            maxPlayTime: 20,
+            maxPlayTime: 50,
             currentPlayTime: 20
         };
         
@@ -121,6 +122,9 @@
         clickMiss[jsGFwk.ResourceManager.sounds.format.ogg] = { source: "fx/down2.ogg" };
         jsGFwk.ResourceManager.addSound({ name: "miss", sources: clickMiss});
         
+        jsGFwk.ResourceManager.addGraphic({ name: "celeste", source: "images/celeste.png" });
+        jsGFwk.ResourceManager.addGraphic({ name: "naranja", source: "images/naranja.png" });
+        
         var shapeContainer = jsGFwk.Container.createContainer('shapeContainer', shape, true);
         
         jsGFwk.Scenes.create({name: "hud",
@@ -132,6 +136,8 @@
         jsGFwk.Scenes.create({name: "game",
                               gameObjects: [background, levelController,
                                             shapeContainer, foreground] });
+        
+        jsGFwk.Scenes.create({name: "endgame", gameObjects: [background, endGame] });
 
         jsGFwk.ResourceManager.onResourcesLoadedCompleted = function() {
             jsGFwk.ResourceManager.sounds.music.audio.loop = true;
