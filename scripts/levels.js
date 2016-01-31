@@ -195,24 +195,28 @@ var drawingFunctions = {
     
     levels = []; 
     if (levelsEnabled.colors1) {
-        for (i = 1; i <= 7; i++) {
-            levels.push(addGridLevel({number: i}));    
+        for (i = 2; i <= 8; i++) {
+            levels.push(addGridLevel({number: parseInt(i)}));    
         }
     }
+    
     var otherReds = [{r: 170, g: 77, b: 7}, {r: 221, g: 100, b: 10}];
     var otherBlues = [{r: 43, g: 124, b: 178}, {r: 8, g: 62, b: 99}];
     var otherColor1 = [{r: 244, g: 138, b: 42}];
     var otherColor2 = [{r: 53, g: 156, b: 239}];
     var trueBlockColor1 = {r: 209, g: 126, b: 70};
     var trueBlockColor2 = {r: 146, g: 190, b: 214};
-    
+    var isModule;
     if (levelsEnabled.colors2) {
-        for (i = 3; i <= 8; i++) {
-            levels.push(addGridLevel({number: i, trueBlockColor1: trueBlockColor1, trueBlockColor2: trueBlockColor2, otherColor1: otherColor1.slice(), otherColor2: otherColor2.slice()}));
-            if (otherReds.length > 0) {
+        for (i = 5; i <= 14; i++) {
+            
+            levels.push(addGridLevel({number: parseInt(i / 2), trueBlockColor1: trueBlockColor1, trueBlockColor2: trueBlockColor2, otherColor1: otherColor1.slice(), otherColor2: otherColor2.slice()}));
+            isModule = i % 2 === 0;
+            
+            if (otherReds.length > 0 && isModule) {
                 otherColor1.push(otherReds.shift());  
             }
-            if (otherBlues.length > 0) {
+            if (otherBlues.length > 0 && isModule) {
                 otherColor2.push(otherBlues.shift());
             }
         }   
@@ -228,7 +232,7 @@ var drawingFunctions = {
         delta = delta || 1;
         delta = Math.min(1, delta);
         delta *= 10;
-        var magicalFactor = 11;
+        var magicalFactor = 20;
         var grayTone = 60;
         color.r += (grayTone - color.r) / magicalFactor * delta;
         color.g += (grayTone - color.g) / magicalFactor * delta;
@@ -244,13 +248,14 @@ var drawingFunctions = {
     
     var i;
     if (levelsEnabled.fade) {
-        for (i = 3; i <= 8; i++) {
-            levels.push(addGridLevel({number: i, trueBlockColor1: trueBlockColor1, trueBlockColor2: trueBlockColor2, otherColor1: otherColor1.slice(), otherColor2: otherColor2.slice(), updateModifiers: [fadeBlock] }));
+        isModule = i % 2 === 0;
+        for (i = 6; i <= 12; i++) {
+            levels.push(addGridLevel({number: parseInt(i / 2), trueBlockColor1: trueBlockColor1, trueBlockColor2: trueBlockColor2, otherColor1: otherColor1.slice(), otherColor2: otherColor2.slice(), updateModifiers: [fadeBlock] }));
 
-            if (otherReds.length > 0) {
+            if (otherReds.length > 0 && isModule) {
                 otherColor1.push(otherReds.shift());  
             }
-            if (otherBlues.length > 0) {
+            if (otherBlues.length > 0 && isModule) {
                 otherColor2.push(otherBlues.shift());
             }
         }        
@@ -263,15 +268,15 @@ var drawingFunctions = {
     otherColor2 = {r: 244, g: 138, b: 42};
     
     if (levelsEnabled.shapes) {
-        for (i = 2; i <= 8; i++) {
-            levels.push(addGridLevel({number: i, trueBlockColor1: trueBlockColor1,
+        for (i = 7; i <= 12; i++) {
+            levels.push(addGridLevel({number: parseInt(i / 2), trueBlockColor1: trueBlockColor1,
                                       trueBlockColor2: trueBlockColor2, otherColor1: otherColor1,
                                       otherColor2: otherColor2, updateModifiers: [],
                                       draw: drawingFunctions.drawShapes(drawingFunctions.drawStar,
                                                                         [drawingFunctions.drawCircle, 
                                                                          drawingFunctions.drawTriangle, 
                                                                          drawingFunctions.drawSquare],
-                                                                        Math.min(3, i)) }));
+                                                                        Math.min(3, parseInt(i / 2)))}));
         } 
     }
     
@@ -281,8 +286,8 @@ var drawingFunctions = {
     trueBlockColor2 = {r: 146, g: 190, b: 214};
     
     if (levelsEnabled.shapesColor) {
-        for (i = 4; i <= 12; i++) {
-            levels.push(addGridLevel({number: i, 
+        for (i = 18; i <= 28; i++) {
+            levels.push(addGridLevel({number: parseInt(i / 4), 
                                       trueBlockColor1: trueBlockColor1,
                                       trueBlockColor2: trueBlockColor2, 
                                       otherColor1: otherReds,
@@ -292,13 +297,13 @@ var drawingFunctions = {
                                                                         [drawingFunctions.drawCircle, 
                                                                          drawingFunctions.drawTriangle, 
                                                                          drawingFunctions.drawStar],
-                                                                         i - 3, i - 2) }));
+                                                                         parseInt(i / 4) - 3, parseInt(i / 4) - 2) }));
         } 
     }
     
     if (levelsEnabled.shapesColorFading) {
-        for (i = 3; i <= 7; i++) {
-            levels.push(addGridLevel({number: i, 
+        for (i = 7; i <= 14; i++) {
+            levels.push(addGridLevel({number: parseInt(i / 2), 
                                       trueBlockColor1: trueBlockColor1,
                                       trueBlockColor2: trueBlockColor2, 
                                       otherColor1: otherReds,
@@ -308,7 +313,7 @@ var drawingFunctions = {
                                                                         [drawingFunctions.drawSquare, 
                                                                          drawingFunctions.drawTriangle, 
                                                                          drawingFunctions.drawStar],
-                                                                         i - 3, i - 2) }));
+                                                                         parseInt(i / 2) - 3, parseInt(i / 2) - 2) }));
         } 
     }
 }());
