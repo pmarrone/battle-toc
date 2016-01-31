@@ -31,6 +31,10 @@ var hud = {
                 jsGFwk.IO.touch.unregisterTouch(self.touchId);
                 jsGFwk.IO.mouse.unregisterClick(self.clickId);
                 sidePlayers.style.display = 'none';
+                
+                //Reset the timer
+                GLOBAL.currentPlayTime = GLOBAL.maxPlayTime;
+                
                 jsGFwk.Scenes.scenes.game.enable();
                 return;
             }
