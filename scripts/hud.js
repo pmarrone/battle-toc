@@ -66,18 +66,32 @@ var hud = {
         this.timerBlink.tick(delta);
     },
     draw: function (context) {
-        context.font = '200pt zxBold';
-        context.textAlign = 'center';
-        if (this.showStart) {
-            context.fillText('Start', jsGFwk.settings.width / 2,
-                             jsGFwk.settings.height / 2);
-        }
         
-        context.font = '100pt zxBold';
+        context.textAlign = 'center';
+        
+        context.drawImage(jsGFwk.ResourceManager.graphics.celeste.image,
+                         -(jsGFwk.ResourceManager.graphics.celeste.image.width / 3),
+                         (jsGFwk.settings.height) / 2 - (jsGFwk.ResourceManager.graphics.celeste.image.height / 2));
+
+        context.drawImage(jsGFwk.ResourceManager.graphics.naranja.image,
+                         jsGFwk.settings.width - 224,
+                         (jsGFwk.settings.height) / 2 - (jsGFwk.ResourceManager.graphics.naranja.image.height / 2));
+        
+        context.font = '130pt zxBold';
+        context.fillStyle = '#359CEF';
+        context.fillText('BATTLE ', 550, 180);
+        context.fillStyle = '#F48A2A';
+        context.fillText('TOC', 950, 180);
+        
+        context.fillStyle = 'black';
+        context.font = '130pt zxBold';
+        this.showStart && context.fillText('Start', jsGFwk.settings.width / 2, jsGFwk.settings.height / 2);
+        
+        context.font = '60pt zxBold';
         context.fillText('Credits', jsGFwk.settings.width / 2, (jsGFwk.settings.height / 2) + 100);
         
-        context.font = '110pt zxBold';
-        context.fillText('PICK A SIDE!!!', jsGFwk.settings.width / 2,
+        context.font = '70pt zxBold';
+        context.fillText('CHOOSE A SIDE !!!', jsGFwk.settings.width / 2,
                          (jsGFwk.settings.height / 2) + 300);
     }
 };
