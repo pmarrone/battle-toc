@@ -125,8 +125,20 @@
         clickMiss[jsGFwk.ResourceManager.sounds.format.ogg] = { source: "fx/down2.ogg" };
         jsGFwk.ResourceManager.addSound({ name: "miss", sources: clickMiss});
         
+        var bastaChicos = {};
+        bastaChicos[jsGFwk.ResourceManager.sounds.format.mp3] = { source: "fx/bastaChicos.mp3" };
+        bastaChicos[jsGFwk.ResourceManager.sounds.format.ogg] = { source: "fx/bastaChicos.ogg" };
+        jsGFwk.ResourceManager.addSound({ name: "bastaChicos", sources: bastaChicos});
+        
+        var miami = {};
+        miami[jsGFwk.ResourceManager.sounds.format.mp3] = { source: "fx/miami.mp3" };
+        miami[jsGFwk.ResourceManager.sounds.format.ogg] = { source: "fx/miami.ogg" };
+        jsGFwk.ResourceManager.addSound({ name: "miami", sources: miami});
+        
         jsGFwk.ResourceManager.addGraphic({ name: "celeste", source: "images/celeste.png" });
         jsGFwk.ResourceManager.addGraphic({ name: "naranja", source: "images/naranja.png" });
+        
+        jsGFwk.ResourceManager.addGraphic({ name: "contraportada", source: "images/contraportada.png" });
         
         var shapeContainer = jsGFwk.Container.createContainer('shapeContainer', shape, true);
         

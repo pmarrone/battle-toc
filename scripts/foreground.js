@@ -8,6 +8,8 @@ var foreground = {
             action: function () {
                 GLOBAL.currentPlayTime--;
                 if (GLOBAL.currentPlayTime === 0) {
+                    levelController.clearPlayerLevel('player1');
+                    levelController.clearPlayerLevel('player2');
                     jsGFwk.Scenes.scenes.endgame.enable();
                 }
             },

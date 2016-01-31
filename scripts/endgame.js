@@ -1,3 +1,4 @@
+/*global GLOBAL, jsGFwk */
 var endGame = {
     id: 'endGame',
     visible: true,
@@ -5,6 +6,8 @@ var endGame = {
         this.winner = GLOBAL.currentLevels.player1 === GLOBAL.currentLevels.player2 ?
             'No one wins' : ((GLOBAL.currentLevels.player1 > GLOBAL.currentLevels.player2) ?
                              'Ricky wins' : 'Putin wins');
+
+        jsGFwk.ResourceManager.sounds[GLOBAL.currentLevels.player1 > GLOBAL.currentLevels.player2 ? 'miami' : 'bastaChicos'].audio.play();
         GLOBAL.currentLevels.player1 = 0;
         GLOBAL.currentLevels.player2 = 0;
         

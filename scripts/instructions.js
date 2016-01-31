@@ -1,3 +1,4 @@
+/*global jsGFwk*/
 var instructions = {
     id: 'instructions',
     visible: true,
@@ -14,9 +15,10 @@ var instructions = {
         this.playTime.tick(delta);
     },
     draw: function (context) {
-        context.textAlign = 'center';
-        context.fillStyle = '#359CEF';
-        context.font = '60pt zxBold';
-        context.fillText("Tap the different one", jsGFwk.settings.width / 2, jsGFwk.settings.height / 2);
+        
+        context.drawImage(jsGFwk.ResourceManager.graphics.contraportada.image,
+                     (jsGFwk.settings.width - jsGFwk.ResourceManager.graphics.contraportada.image.width) / 2,
+                     (jsGFwk.settings.height - jsGFwk.ResourceManager.graphics.contraportada.image.height) / 2);
+
     }
 };

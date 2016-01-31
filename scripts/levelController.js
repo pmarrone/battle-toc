@@ -10,7 +10,7 @@ var levelController = {
             player1: [],
             player2: []
         };
-        
+        shapeContainer.clearAll();
         this.initGame();
     },
     update: function (delta) { },
