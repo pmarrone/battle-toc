@@ -1,5 +1,18 @@
 /*global levelController, clickActions, jsGFwk */
 
+    
+/**
+ Niveles habilitados
+*/
+var levelsEnabled = {
+    colors1: true,
+    colors2: true,
+    fade: true,
+    shapes: true,
+    shapesColor: true,
+    shapesColorFading: true
+};
+
 var levels;
 
 var parseColor = function (color) {
@@ -139,7 +152,7 @@ var drawingFunctions = {
                 var block = {
                     updateModifiers: updateModifiers || [],
                     trueBlockColor: trueBlockColor,
-                    listOfOriginalVectorsOfColors: otherColor.slice(),
+                    listOfOriginalVectorsOfColors: Array.isArray(otherColor) ? otherColor.slice() : [otherColor],
                     otherColor: getOtherColor(),
                     isClickable: true,
                     player: player,
@@ -156,17 +169,7 @@ var drawingFunctions = {
         }
         return blocks;
     }
-    
-    /**
-     Niveles habilitados
-    */
-    var levelsEnabled = {
-        colors1: false,
-        colors2: false,
-        fade: false,
-        shapes: false,
-        shapesColor: true
-    };
+
     
     function addGridLevel(params) {
         var i = 0;
@@ -289,7 +292,23 @@ var drawingFunctions = {
                                                                         [drawingFunctions.drawCircle, 
                                                                          drawingFunctions.drawTriangle, 
                                                                          drawingFunctions.drawStar],
-                                                                         10, 10) }));
+                                                                         i - 3, i - 2) }));
+        } 
+    }
+    
+    if (levelsEnabled.shapesColorFading) {
+        for (i = 3; i <= 7; i++) {
+            levels.push(addGridLevel({number: i, 
+                                      trueBlockColor1: trueBlockColor1,
+                                      trueBlockColor2: trueBlockColor2, 
+                                      otherColor1: otherReds,
+                                      otherColor2: otherBlues,
+                                      updateModifiers: [fadeBlock],
+                                      draw: drawingFunctions.drawColorShapes(drawingFunctions.drawCircle,
+                                                                        [drawingFunctions.drawSquare, 
+                                                                         drawingFunctions.drawTriangle, 
+                                                                         drawingFunctions.drawStar],
+                                                                         i - 3, i - 2) }));
         } 
     }
 }());
