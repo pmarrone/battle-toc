@@ -175,10 +175,10 @@ var drawingFunctions = {
         var i = 0;
         
         var number = params.number || 1;
-        var trueBlockColor1 = params.trueBlockColor1 || {r: 0, g: 0, b: 255};
-        var otherColor1 = params.otherColor1 || {r: 255, g: 0, b: 0};
-        var trueBlockColor2 = params.trueBlockColor2 || {r: 255, g: 0, b: 0};
-        var otherColor2 = params.otherColor2 || {r: 0, g: 0, b: 255};
+        var trueBlockColor1 = params.trueBlockColor1 || {r: 53, g: 156, b: 239};
+        var otherColor1 = params.otherColor1 || {r: 244, g: 138, b: 42};
+        var trueBlockColor2 = params.trueBlockColor2 || {r: 244, g: 138, b: 42};
+        var otherColor2 = params.otherColor2 || {r: 53, g: 156, b: 239};
         var updateModifiers = params.updateModifiers;
         var draw = params.draw;
 
@@ -199,12 +199,12 @@ var drawingFunctions = {
             levels.push(addGridLevel({number: i}));    
         }
     }
-    var otherReds = [{r: 200, g: 0, b: 0}, {r: 230, g: 40, b: 0}, {r: 150, g: 30, b: 20}, {r: 100, g: 20, b: 60}];
-    var otherBlues = [{r: 0, g: 0, b: 210}, {r: 0, g: 40, b: 200}, {r: 50, g: 50, b: 200}, {r: 60, g: 60, b: 150}];
-    var otherColor1 = [{r: 255, g: 0, b: 0}];
-    var otherColor2 = [{r: 0, g: 0, b: 255}];
-    var trueBlockColor1 = {r: 230, g: 40, b: 80};
-    var trueBlockColor2 = {r: 40, g: 80, b: 250};
+    var otherReds = [{r: 170, g: 77, b: 7}, {r: 221, g: 100, b: 10}];
+    var otherBlues = [{r: 43, g: 124, b: 178}, {r: 8, g: 62, b: 99}];
+    var otherColor1 = [{r: 244, g: 138, b: 42}];
+    var otherColor2 = [{r: 53, g: 156, b: 239}];
+    var trueBlockColor1 = {r: 209, g: 126, b: 70};
+    var trueBlockColor2 = {r: 146, g: 190, b: 214};
     
     if (levelsEnabled.colors2) {
         for (i = 3; i <= 8; i++) {
@@ -257,10 +257,10 @@ var drawingFunctions = {
     }
     
     
-    trueBlockColor1 = {r: 0, g: 0, b: 255};
-    otherColor1 = {r: 0, g: 0, b: 255};
-    trueBlockColor2 = {r: 255, g: 0, b: 0};
-    otherColor2 = {r: 255, g: 0, b: 0};
+    trueBlockColor1 = {r: 53, g: 156, b: 239};
+    otherColor1 = {r: 53, g: 156, b: 239};
+    trueBlockColor2 = {r: 244, g: 138, b: 42};
+    otherColor2 = {r: 244, g: 138, b: 42};
     
     if (levelsEnabled.shapes) {
         for (i = 2; i <= 8; i++) {
@@ -275,10 +275,10 @@ var drawingFunctions = {
         } 
     }
     
-    otherReds = [{r: 255, g: 0, b: 0}, {r: 200, g: 0, b: 0}, {r: 230, g: 40, b: 0}, {r: 150, g: 30, b: 20}, {r: 100, g: 20, b: 60}];
-    otherBlues = [{r: 0, g: 0, b: 255}, {r: 0, g: 0, b: 210}, {r: 0, g: 40, b: 200}, {r: 50, g: 50, b: 200}, {r: 60, g: 60, b: 150}];
-    trueBlockColor1 = {r: 230, g: 40, b: 80};
-    trueBlockColor2 = {r: 40, g: 80, b: 250};
+    otherReds = [{r: 170, g: 77, b: 7}, {r: 221, g: 100, b: 10}];
+    otherBlues = [{r: 43, g: 124, b: 178}, {r: 8, g: 62, b: 99}];
+    trueBlockColor1 = {r: 209, g: 126, b: 70};
+    trueBlockColor2 = {r: 146, g: 190, b: 214};
     
     if (levelsEnabled.shapesColor) {
         for (i = 4; i <= 12; i++) {
