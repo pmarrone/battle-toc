@@ -185,7 +185,7 @@ var drawingFunctions = {
 
         return {
             player1: function () {
-                return createGridLevel(0, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 5, 'player1',  trueBlockColor1, otherColor1, 50, updateModifiers, draw);
+                return createGridLevel(5, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 5, 'player1',  trueBlockColor1, otherColor1, 50, updateModifiers, draw);
             },
             player2: function () {
                 return createGridLevel(jsGFwk.settings.width / 2, jsGFwk.settings.width / 2, jsGFwk.settings.height, number, 5, 'player2', trueBlockColor2, otherColor2, 50, updateModifiers, draw);

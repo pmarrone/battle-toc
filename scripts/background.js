@@ -14,7 +14,7 @@ function paintLevelBackground(level, playerXOffset, context) {
         {r: 10, g: 200, b: 150}
     ];
 
-    if (level < 10) {
+    if (level < 22) {
         paintPlayerBackground(grey, playerXOffset, context);
     } else if (level < 45) {
         paintPlayerBackground(colors[(playerXOffset * 11 + 51 + level * 4373) % colors.length], playerXOffset, context);
